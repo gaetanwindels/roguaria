@@ -42,7 +42,7 @@ public class Player : NetworkBehaviour
         Look();
         if (rwPlayer.GetButtonDown("Fire"))
         {
-            DoFire();
+            DoFire(firePosition.transform.position, transform.rotation);
         }
 
         animator.SetBool("IsIdle", direction == Vector3.zero);
@@ -90,9 +90,9 @@ public class Player : NetworkBehaviour
     }
 
     [Command]
-    private void DoFire()
+    private void DoFire(Vector3 position, Quaternion rotation)
     {
-        var fire = Instantiate(bullet, firePosition.transform.position, transform.rotation);
+        var fire = Instantiate(bullet, position, rotation);
         NetworkServer.Spawn(fire);
     }
 }

@@ -8,6 +8,7 @@ public class EnemyController : NetworkBehaviour
     // Config parameters
     [SerializeField] private float moveSpeed = 10;
     [SerializeField] private float turnSpeed = 10;
+    [SerializeField] private GameObject deathParticleSystem;
     private Player[] players;
 
     void Start()
@@ -25,6 +26,8 @@ public class EnemyController : NetworkBehaviour
         {
             NetworkServer.Destroy(this.gameObject);
             NetworkServer.Destroy(other.gameObject);
+            var seed = Random.Range(1, 20000);
+            EmitDeathParticles((uint)seed);
         }
     }
 
@@ -39,10 +42,24 @@ public class EnemyController : NetworkBehaviour
         var closest = FindClosestPlayer();
         if (closest != null)
         {
-            var targetPos = new Vector3(closest.transform.position.x, this.transform.position.y, closest.transform.position.y);
+            var targetPos = new Vector3(closest.transform.position.x, this.transform.position.y, closest.transform.position.z);
             transform.position = Vector3.MoveTowards(transform.position, targetPos, Time.deltaTime * moveSpeed);
             transform.LookAt(targetPos);
         }
+    }
+
+    public void EmitDeathParticles(uint seed)
+    {
+        var particles = Instantiate(deathParticleSystem, transform.position, transform.rotation);
+        var ps = deathParticleSystem.GetComponent<ParticleSystem>();
+
+        if (ps != null)
+        {
+            ps.randomSeed = seed;
+            ps.Play();
+        }
+
+        NetworkServer.Spawn(particles);
     }
 
     public void SetPlayers(Player[] players)

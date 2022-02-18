@@ -1414,6 +1414,67 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2115967240}
   m_CullTransparentMesh: 1
+--- !u!1001 &2806885585130017510
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 2806885584937627410, guid: 9ee6394f20cd20b4fbcadbe991f66021, type: 3}
+      propertyPath: m_RootOrder
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2806885584937627410, guid: 9ee6394f20cd20b4fbcadbe991f66021, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 9.1022625
+      objectReference: {fileID: 0}
+    - target: {fileID: 2806885584937627410, guid: 9ee6394f20cd20b4fbcadbe991f66021, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 3.66
+      objectReference: {fileID: 0}
+    - target: {fileID: 2806885584937627410, guid: 9ee6394f20cd20b4fbcadbe991f66021, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 16.55
+      objectReference: {fileID: 0}
+    - target: {fileID: 2806885584937627410, guid: 9ee6394f20cd20b4fbcadbe991f66021, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2806885584937627410, guid: 9ee6394f20cd20b4fbcadbe991f66021, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2806885584937627410, guid: 9ee6394f20cd20b4fbcadbe991f66021, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2806885584937627410, guid: 9ee6394f20cd20b4fbcadbe991f66021, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2806885584937627410, guid: 9ee6394f20cd20b4fbcadbe991f66021, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2806885584937627410, guid: 9ee6394f20cd20b4fbcadbe991f66021, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2806885584937627410, guid: 9ee6394f20cd20b4fbcadbe991f66021, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2806885584937627415, guid: 9ee6394f20cd20b4fbcadbe991f66021, type: 3}
+      propertyPath: m_Name
+      value: Enemy Death Particles
+      objectReference: {fileID: 0}
+    - target: {fileID: 5993130680783407012, guid: 9ee6394f20cd20b4fbcadbe991f66021, type: 3}
+      propertyPath: sceneId
+      value: 2569956682
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 9ee6394f20cd20b4fbcadbe991f66021, type: 3}
 --- !u!1001 &4359646324198098911
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1471,7 +1532,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4359646323341420028, guid: 7815a531ace5a124dbdddf11f0f77620, type: 3}
       propertyPath: spawnPrefabs.Array.size
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 4359646323341420028, guid: 7815a531ace5a124dbdddf11f0f77620, type: 3}
       propertyPath: spawnPrefabs.Array.data[0]
@@ -1481,6 +1542,10 @@ PrefabInstance:
       propertyPath: spawnPrefabs.Array.data[1]
       value: 
       objectReference: {fileID: 2673655801450712467, guid: 5b5b8feef016e104ba1f53654c65dbf9, type: 3}
+    - target: {fileID: 4359646323341420028, guid: 7815a531ace5a124dbdddf11f0f77620, type: 3}
+      propertyPath: spawnPrefabs.Array.data[2]
+      value: 
+      objectReference: {fileID: 7685702452383901531, guid: 473e88874dbc057408d902dd86323243, type: 3}
     - target: {fileID: 4359646323341420030, guid: 7815a531ace5a124dbdddf11f0f77620, type: 3}
       propertyPath: m_Name
       value: Network Manager
