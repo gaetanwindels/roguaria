@@ -5,10 +5,11 @@ using Mirror;
 
 public class EnemySpawner : NetworkBehaviour
 {
-    [SerializeField] EnemyController enemyToSpawn;
+    [SerializeField] GameObject enemyToSpawn;
     [SerializeField] float spawnRate;
 
     private Player[] players = { };
+    private GameManager gameManager;
 
     private float currentTimer = 0;
 
@@ -16,26 +17,27 @@ public class EnemySpawner : NetworkBehaviour
     void Start()
     {
         players = FindObjectsOfType<Player>();
+        gameManager = FindObjectOfType<GameManager>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (!isServer)
+        if (!isServer || !gameManager.IsStarted)
         {
             return;
         }
 
-        currentTimer += Time.deltaTime;
-
-        if (currentTimer >= spawnRate)
+        if (currentTimer == 0 || currentTimer >= spawnRate)
         {
-            var enemy = Instantiate<EnemyController>(enemyToSpawn, transform.position, Quaternion.identity);
+            var enemy = Instantiate(enemyToSpawn, transform.position, Quaternion.identity);
             players = FindObjectsOfType<Player>();
-            enemy.SetPlayers(players);
+            //enemy.SetPlayers(players);
             NetworkServer.Spawn(enemy.gameObject);
             currentTimer = 0;
         }
+
+        currentTimer += Time.deltaTime;
 
     }
 }

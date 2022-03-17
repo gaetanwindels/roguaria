@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 2806885584937627413}
   - component: {fileID: 2806885584937627412}
   - component: {fileID: 5993130680783407012}
+  - component: {fileID: -7364688006414804726}
   m_Layer: 0
   m_Name: Enemy Death Particles
   m_TagString: Untagged
@@ -27,7 +28,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2806885584937627415}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 9.1022625, y: 3.66, z: 16.55}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -109,7 +110,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: 7316
+  randomSeed: 1629
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -4882,3 +4883,18 @@ MonoBehaviour:
   visible: 0
   m_AssetId: 9ee6394f20cd20b4fbcadbe991f66021
   hasSpawned: 0
+--- !u!114 &-7364688006414804726
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2806885584937627415}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4a245063142d7364baab6750bc87a65b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
+  time: 3

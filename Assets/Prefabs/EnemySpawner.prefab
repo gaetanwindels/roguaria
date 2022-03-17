@@ -46,4 +46,4 @@ MonoBehaviour:
   syncMode: 0
   syncInterval: 0.1
   enemyToSpawn: {fileID: 8348907698608603077, guid: 59bc763c6ae9c194bb23ea3f22c246c6, type: 3}
-  spawnRate: 0
+  spawnRate: 3

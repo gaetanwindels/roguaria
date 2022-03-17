@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Mirror;
+using System.Linq;
 
 public class EnemyController : NetworkBehaviour
 {
@@ -9,26 +10,77 @@ public class EnemyController : NetworkBehaviour
     [SerializeField] private float moveSpeed = 10;
     [SerializeField] private float turnSpeed = 10;
     [SerializeField] private GameObject deathParticleSystem;
+    [SerializeField] private float damage;
+    [SerializeField] private GameObject healthBar;
+
+    [SyncVar]
+    private float health;
+
+    [SerializeField]
+    private float maxHealth = 100f;
+
+    [SerializeField] private float blinkDuration = 0.2f;
+    [SerializeField] private GameObject damageDisplayer;
     private Player[] players;
+
+
+    // Cached variables
+    private Rigidbody body;
+    private Blink blink;
 
     void Start()
     {
+        body = GetComponent<Rigidbody>();
+        blink = GetComponent<Blink>();
+        health = maxHealth;
+        players = FindObjectsOfType<Player>();
     }
 
-    void OnCollisionEnter(Collision other)
+    void OnCollisionStay(Collision other)
     {
         if (!isServer)
         {
             return;
         }
 
-        if (other.gameObject.tag == "bullet")
+        if (other.gameObject.tag == Tags.Player)
+        {
+            var player = other.gameObject.GetComponent<Player>();
+
+            if (player != null)
+            {
+                player.TakeDamage(this.damage);
+            }
+        }
+    }
+
+    private void KnockBack(float value)
+    {
+        transform.position += -transform.forward * value;
+    }
+
+    public void TakeDamage(float damage, float knockBack)
+    {
+        health = Mathf.Max(0, health - damage);
+        healthBar.transform.localScale = new Vector3(health / maxHealth, healthBar.transform.localScale.y, healthBar.transform.localScale.z);
+
+        if (health <= 0)
         {
             NetworkServer.Destroy(this.gameObject);
-            NetworkServer.Destroy(other.gameObject);
             var seed = Random.Range(1, 20000);
             EmitDeathParticles((uint)seed);
         }
+        else
+        {
+            KnockBack(knockBack);
+            DoBlink();
+        }
+    }
+
+    [ClientRpc]
+    private void DoBlink()
+    {
+        blink.doBlink(blinkDuration);
     }
 
     // Update is called once per frame
@@ -38,6 +90,8 @@ public class EnemyController : NetworkBehaviour
         {
             return;
         }
+
+        body.velocity = Vector3.zero;
 
         var closest = FindClosestPlayer();
         if (closest != null)
@@ -51,14 +105,6 @@ public class EnemyController : NetworkBehaviour
     public void EmitDeathParticles(uint seed)
     {
         var particles = Instantiate(deathParticleSystem, transform.position, transform.rotation);
-        var ps = deathParticleSystem.GetComponent<ParticleSystem>();
-
-        if (ps != null)
-        {
-            ps.randomSeed = seed;
-            ps.Play();
-        }
-
         NetworkServer.Spawn(particles);
     }
 
@@ -71,10 +117,11 @@ public class EnemyController : NetworkBehaviour
     {
         float minDistance = 100000000;
         Player minPlayer = null;
-        foreach (var player in players)
+        var filtered = players.Where(pl => !pl.Dead);
+        foreach (var player in filtered)
         {
             var distance = Vector3.Distance(transform.position, player.transform.position);
-            if (distance < minDistance)
+            if (!player.Dead && distance < minDistance)
             {
                 minPlayer = player;
                 minDistance = distance;
@@ -83,4 +130,5 @@ public class EnemyController : NetworkBehaviour
 
         return minPlayer;
     }
+
 }

@@ -12,7 +12,13 @@ public class LobbyManager : NetworkBehaviour
 
     void Start()
     {
-        ipAddress.text = GetPublicIP() + ":7777";
+        ipAddress.gameObject.SetActive(isServer);
+
+        if (isServer)
+        {
+            ipAddress.text = GetPublicIP() + ":7777";
+        }
+
     }
 
     // Update is called once per frame
