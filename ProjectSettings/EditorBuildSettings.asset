@@ -12,7 +12,7 @@ EditorBuildSettings:
     path: Assets/Scenes/Menu Scene.unity
     guid: 6bbb1dc909f37224bb2b2b7516a59e6e
   - enabled: 1
-    path: Assets/Scenes/Game Scene.unity
+    path: Assets/Scenes/Scene Leo.unity
     guid: 001d354fca2a31e4797c020501efc927
   - enabled: 1
     path: Assets/Scenes/Lobby Scene.unity
